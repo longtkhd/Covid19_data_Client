@@ -17,10 +17,17 @@ import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import {
   getAllCase,
   getAllCaseSuccess,
-  getAllCaseFailed
+  getAllCaseFailed,
+  getGlobalCase,
+  getGlobalCaseSuccess,
+  getGlobalCaseFailed,
+
+
+
 } from '../actions/index';
 
 function Copyright() {
@@ -83,66 +90,91 @@ const useStyles = makeStyles(theme => ({
 // const dataCase = props.AllCase.user;
 
 
-const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
+
+
 
 export  function AllCase(props) {
+
+  const [cases,setCases] = useState();
+  var stt = null;
+  var caseVn = null;
+  var deathsVn = null;
+  var recoveredVn = null;
+  var todayCasesVn = null;
+  var todayDeathsVn = null;
+  for (var i = 0; i < props.AllCase.length; i++) {
+    if (props.AllCase[i].country === 'Vietnam') {
+
+          caseVn = props.AllCase[i].cases;
+          deathsVn = props.AllCase[i].deaths;
+          recoveredVn = props.AllCase[i].recovered;
+      todayCasesVn = props.AllCase[i].todayCases;
+          todayDeathsVn = props.AllCase[i].todayDeaths;
+
+   
+
+    }
+  }
+  
+  // console.log(props.AllCase[stt].cases)
+  // console.log(props.AllCase[61]);
+  // console.log(props.AllCase[stt];
+ 
+ 
   const tiers = [
     {
       title: 'Viet Nam',
-      price: '10',
-      description: ['10 users included', '2 GB of storage', 'Help center access', 'Email support'],
-      buttonText: 'Sign up for free',
-      buttonVariant: 'outlined',
+      price: `${caseVn} `,
+      description: [
+        `${todayCasesVn} Today Cases`,
+        `${deathsVn} Deaths`,
+        `${todayDeathsVn} Today Deaths`,
+        `${recoveredVn} Recovered`,
+         
+            
+
+      ],
+      buttonText: 'More',
+      buttonVariant: 'contained',
     },
     {
       title: 'Global',
       subheader: 'Most popular',
-      price: '15',
+      price: `${props.AllCaseGlobal.cases}`,
       description: [
-        '20 users included',
-        '10 GB of storage',
-        'Help center access',
-        'Priority email support',
+        `${props.AllCaseGlobal.deaths} Deaths`
+        ,
+        `${props.AllCaseGlobal.recovered} Recovered`,
+        <span>Global</span>
+
+        
+       
       ],
-      buttonText: 'Get started',
+      buttonText: ' More',
       buttonVariant: 'contained',
     },
-    {
-      title: 'Hai Duong',
-      price: '30',
-      description: [
-        '50 users included',
-        '30 GB of storage',
-        'Help center access',
-        'Phone & email support',
-      ],
-      buttonText: 'Contact us',
-      buttonVariant: 'outlined',
-    },
+    // {
+    //   title: 'Hai Duong',
+    //   price: '30',
+    //   description: [
+    //     '50 users included',
+    //     '30 GB of storage',
+    //     'Help center access',
+    //     'Phone & email support',
+    //   ],
+    //   buttonText: 'Contact us',
+    //   buttonVariant: 'outlined',
+    // },
   ];
   const classes = useStyles();
   useEffect(() => {
-    props.dispatch(getAllCase());
+    props.dispatch(getGlobalCase());
     
   }, []);
-  // console.log(prop)
+//  console.log(props.AllCaseGlobal);
+  // console.log(props.AllCase[62]);
+
+  // const [stt,setStt] = useState('')
   
 
   
@@ -152,6 +184,7 @@ export  function AllCase(props) {
 
 
   return (
+    
    
     <React.Fragment>
       <CssBaseline />
@@ -161,20 +194,9 @@ export  function AllCase(props) {
            COVID-19 CORONAVIRUS OUTBREAK
            
           </Typography>
-          {/* <nav>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Features
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Enterprise
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Support
-            </Link>
-          </nav> */}
-          <Button href="#" color="primary" variant="outlined" className={classes.link}>
-            Login
-          </Button>
+          
+         
+          <GitHubIcon href="https://github.com/longtkhd"></GitHubIcon>
         </Toolbar>
       </AppBar>
       {/* Hero unit */}
@@ -186,7 +208,7 @@ export  function AllCase(props) {
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map(tier => (
             // Enterprise card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
+            <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={6}>
               <Card>
                 <CardHeader
                   title={tier.title}
@@ -199,15 +221,16 @@ export  function AllCase(props) {
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
+                      {tier.price}
                     </Typography>
                     <Typography variant="h6" color="textSecondary">
-                      /mo
+
                     </Typography>
                   </div>
                   <ul>
                     {tier.description.map(line => (
                       <Typography component="li" variant="subtitle1" align="center" key={line}>
+                        
                         {line}
                       </Typography>
                     ))}
@@ -231,7 +254,8 @@ export  function AllCase(props) {
 }
  const mapStateToProps = (state, ownProps) => {
   return {
-     AllCase: state.user
+     AllCaseGlobal: state.global,
+     AllCase : state.users,
   }
 }
 function mapDispatchToProps(dispatch) {

@@ -224,7 +224,7 @@ export function SimpleTable(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const { AllCase } = props;
-  console.log(AllCase);
+  // console.log(AllCase);
   useEffect(() => {
     props.dispatch(getAllCase());
 

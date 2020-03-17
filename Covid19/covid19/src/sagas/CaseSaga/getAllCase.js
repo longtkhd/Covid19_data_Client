@@ -1,6 +1,6 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import * as types from '../../constants';
-import { GETCASE } from '../../urlConfig';
+import { GETCASE ,GETGLOBAL} from '../../urlConfig';
 import axios from 'axios';
 import {
   getAllCase,
@@ -16,7 +16,7 @@ export function* fetchGetAllCase(action) {
       method: 'GET',
     });
     if (DataCase) {
-      console.log(DataCase);
+      console.log(DataCase.data);
       yield put(getAllCaseSuccess(DataCase.data));
 
     } else {
@@ -29,6 +29,8 @@ export function* fetchGetAllCase(action) {
 
   }
 }
+
+
 
 export default function* getCase() {
   // See example in containers/HomePage/saga.js

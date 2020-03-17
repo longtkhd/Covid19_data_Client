@@ -39,7 +39,7 @@ export function SimpleTable(props) {
     props.dispatch(getAllCase());
 
   }, []);
-  console.log(props.AllCase)
+  // console.log(props.AllCase)
 
 
   return (
