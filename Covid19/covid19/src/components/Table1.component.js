@@ -32,9 +32,7 @@ import {
   getAllCaseFailed
 } from '../actions/index';
 
-function createData(Country, Case, TodayCases, Deaths, TodayDeaths, Recovered, Critical) {
-  return { Country, Case, TodayCases, Deaths, TodayDeaths, Recovered, Critical };
-}
+
 
 
 
@@ -65,8 +63,8 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'Country', numeric: false, disablePadding: true, label: 'Country)' },
-  { id: 'Case', numeric: true, disablePadding: false, label: 'Case' },
+  { id: 'Country', numeric: false, disablePadding: true, label: 'Country' },
+  { id: 'case', numeric: true, disablePadding: false, label: 'Case' },
   { id: 'TodayCases', numeric: true, disablePadding: false, label: 'TodayCases' },
   { id: 'Deaths', numeric: true, disablePadding: false, label: 'Deaths' },
   { id: 'TodayDeaths', numeric: true, disablePadding: false, label: 'TodayDeaths' },
@@ -78,6 +76,7 @@ function EnhancedTableHead(props) {
   const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
+    console.log('createsort');
   };
 
   return (
@@ -86,12 +85,12 @@ function EnhancedTableHead(props) {
       
       <TableRow>
         <TableCell padding="checkbox">
-          {/* <Checkbox
+          <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ 'aria-label': 'select all desserts' }}
-          /> */}
+          />
         </TableCell>
         {headCells.map(headCell => (
           <TableCell
@@ -218,7 +217,7 @@ const useStyles = makeStyles(theme => ({
 export function SimpleTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('Case');
+  const [orderBy, setOrderBy] = React.useState('case');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -307,7 +306,7 @@ export function SimpleTable(props) {
               rowCount={AllCase.length}
             />
             <TableBody>
-              {stableSort(props.AllCase, getComparator(order, orderBy))
+              {stableSort(AllCase, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);

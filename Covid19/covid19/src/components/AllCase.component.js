@@ -96,12 +96,12 @@ const useStyles = makeStyles(theme => ({
 export  function AllCase(props) {
 
   const [cases,setCases] = useState();
-  var stt = null;
-  var caseVn = null;
-  var deathsVn = null;
-  var recoveredVn = null;
-  var todayCasesVn = null;
-  var todayDeathsVn = null;
+  var stt = undefined;
+  var caseVn = '';
+  var deathsVn = '';
+  var recoveredVn = '';
+  var todayCasesVn = '';
+  var todayDeathsVn = '';
   for (var i = 0; i < props.AllCase.length; i++) {
     if (props.AllCase[i].country === 'Vietnam') {
 
