@@ -103,7 +103,7 @@ export  function AllCase(props) {
   var todayCasesVn = '';
   var todayDeathsVn = '';
   for (var i = 0; i < props.AllCase.length; i++) {
-    if (props.AllCase[i].country === 'Vietnam') {
+    if (props.AllCase[i].country === 'Viet Nam') {
 
           caseVn = props.AllCase[i].cases;
           deathsVn = props.AllCase[i].deaths;
