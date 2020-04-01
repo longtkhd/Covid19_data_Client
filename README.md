@@ -2,7 +2,7 @@ Demo App : https://covid19react.herokuapp.com/ by longtkhd
 - Material-Ui
 - React + Redux
 - Saga middleware and others
--
+
 
 
 ![Screenshot from 2020-03-17 15-20-28](https://user-images.githubusercontent.com/48525202/78120296-de4d8d80-7433-11ea-996b-9e079ca1902a.png)
