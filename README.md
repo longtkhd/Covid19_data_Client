@@ -1,5 +1,12 @@
 Demo App : https://covid19react.herokuapp.com/ by longtkhd
+
+
 ![Screenshot from 2020-03-17 15-20-28](https://user-images.githubusercontent.com/48525202/78120296-de4d8d80-7433-11ea-996b-9e079ca1902a.png)
+You can choose how to view table in the right corner of the table
+
+
+![Screenshot from 2020-03-17 15-20-32](https://user-images.githubusercontent.com/48525202/78120394-1359e000-7434-11ea-9439-681b2c7dffc9.png)
+
 
 
 
